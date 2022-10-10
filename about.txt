@@ -9,7 +9,7 @@ SECRET
 
 ===================================
 
-
+host=https://curd-brained.vercel.app/
 
 All Routes
 
