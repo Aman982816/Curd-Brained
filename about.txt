@@ -1,0 +1,48 @@
+//please set environment varialbles
+
+PORT
+USERNAME
+PASSWORD
+DATABASENAME
+SECRET
+
+
+===================================
+
+
+
+All Routes
+
+=================================
+// For Registering Employee
+
+//Registering 
+${host}/employee/register
+
+
+//getting all  Employee
+${host}/employee/getEmployees
+
+// deleting Employee
+${host}/employee/deleteEmployee/:id
+
+// updating Employee
+${host}/employee/updateEmployee/:id/
+
+=================================
+
+Note:- sending data in json formet to the api 
+
+
+sample:-
+
+{
+
+    "name":"Hitesh Kumar",
+    "email":"Hitesh@gmail.com",
+    "phone":9898989898,
+    "city":"Jaipur"
+}
+
+
+================
