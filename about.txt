@@ -45,4 +45,8 @@ sample:-
 }
 
 
-================
+====================
+
+live /deployed version :-
+
+https://curd-brained.vercel.app/
