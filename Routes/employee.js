@@ -1,5 +1,24 @@
 const express = require('express');
 const router = express.Router();
+const fs = require('fs');
+const path = require('path');
+
+//Multer used for file storing and uploading in db 
+const multer = require('multer');
+
+
+// setting multer for storing uploaded files
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "uploads");
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname);
+    },
+});
+
+const upload = multer({ storage: storage });
 
 //importing User Model
 const Employee = require('../Models/ Employees.js')
@@ -40,7 +59,7 @@ router.get('/getEmployee/:id', async (req, res) => {
 
 // Registering Employee
 
-router.post('/Register',async (req, res) => {
+router.post('/Register',upload.single('uploadProfileImage'), async (req, res) => {
 
         try {
 
@@ -54,7 +73,11 @@ router.post('/Register',async (req, res) => {
 
             //Registering Employee in the Db
             const RegisterdEmployee = await Employee.create({
-                name, email, phone, city 
+                name, email, phone, city, profileImage: {
+
+                    data: fs.readFileSync(path.join(__dirname, "../", '/uploads/' + req.file.filename)),
+                    contentType: "image/png"
+                }
 
             })
 
@@ -80,7 +103,7 @@ router.post('/Register',async (req, res) => {
 
 //updating Employee
 
-router.put('/updateEmployee/:id', async (req, res) => {
+router.put('/updateEmployee/:id', upload.single('uploadProfileImage'), async (req, res) => {
 
     try {
 
@@ -93,6 +116,13 @@ router.put('/updateEmployee/:id', async (req, res) => {
         if (email) { updatingEmployee.email = email };
         if (phone) { updatingEmployee.phone = phone };
         if (city) { updatingEmployee.city = city };
+        if (req.file) {
+            updatingEmployee.profileImage = {
+
+                data: fs.readFileSync(path.join(__dirname, "../", '/uploads/' + req.file.filename)),
+                contentType: "image/png"
+            }
+        }
 
         // Find the Employee to be updated and update it
 

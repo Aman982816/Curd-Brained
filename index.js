@@ -19,7 +19,7 @@ connectToMongo()
 
 
 // Available Routes
-app.use('/', require('./Routes/root.js'));
+app.use('/', require('./Routes/main.js'));
 app.use('/employee/', require('./Routes/employee.js'));
 
 

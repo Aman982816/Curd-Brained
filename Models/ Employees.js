@@ -3,6 +3,12 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const EmployeeSchema = new Schema({
+    profileImage: {
+
+        data: Buffer,
+        contentType: String
+
+    },
     name: {
         type: String,
         required: true
@@ -16,15 +22,15 @@ const EmployeeSchema = new Schema({
     phone: {
         type: Number,
         required: true,
-   },
+    },
     city: {
         type: String,
         required: true,
-      
+
     }
 
-    
-  
+
+
 });
 const Employee = mongoose.model('Employee', EmployeeSchema);
 module.exports = Employee;
